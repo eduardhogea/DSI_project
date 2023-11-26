@@ -1,3 +1,13 @@
+import sys
+import os
+
+script_dir = os.path.dirname(__file__)                             # The directory of the current script
+parent_dir = os.path.dirname(script_dir)                           # Path to the parent directory
+feature_eng_dir = os.path.join(parent_dir, "Feature Engineering")  # Path to the "Feature Engineering" directory
+images_dir = os.path.join(parent_dir, "Images")                    # Path to the "Images" directory
+sys.path.append(feature_eng_dir)                                   # Append the directory to sys.path
+
+
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.linear_model import LogisticRegression
 from sklearn.svm import LinearSVC
@@ -35,10 +45,11 @@ def train_model(documents, labels, model_type='naive_bayes'):
 
     return model, X_test, y_test, predictions
 
-def plot_confusion_matrix(y_true, y_pred, categories):
+
+def plot_confusion_matrix(y_true, y_pred, categories, filename):
     # Compute confusion matrix
     cm = confusion_matrix(y_true, y_pred)
-    
+
     # Plotting using seaborn
     plt.figure(figsize=(10, 10))
     sns.heatmap(cm, annot=True, fmt="d", xticklabels=categories, yticklabels=categories)
@@ -46,7 +57,9 @@ def plot_confusion_matrix(y_true, y_pred, categories):
     plt.ylabel('Actual')
     plt.xlabel('Predicted')
     plt.tight_layout()
-    plt.savefig("confusion_matrix.png", dpi = 300)
+    plt.savefig(filename, dpi=300)  # Save using the provided filename
+    plt.close()
+
 
 if __name__ == "__main__":
     # Loading the dataset
@@ -57,16 +70,15 @@ if __name__ == "__main__":
 
     # Train and evaluate Naive Bayes
     nb_model, X_test, y_test, nb_predictions = train_model(documents, labels, "naive_bayes")
-    plot_confusion_matrix(y_test, nb_predictions, categories)
-    plt.savefig("confusion_matrix_naive_bayes.png", dpi=300)  # Save the confusion matrix
+    confusion_matrix_path = os.path.join(images_dir, "confusion_matrix_naive_bayes.png")
+    plot_confusion_matrix(y_test, nb_predictions, categories, confusion_matrix_path)
 
     # Train and evaluate Logistic Regression
     lr_model, _, _, lr_predictions = train_model(documents, labels, "logistic_regression")
-    plot_confusion_matrix(y_test, lr_predictions, categories)
-    plt.savefig("confusion_matrix_logistic_regression.png", dpi=300)  # Save the confusion matrix
+    confusion_matrix_path = os.path.join(images_dir, "confusion_matrix_logistic_regression.png")
+    plot_confusion_matrix(y_test, lr_predictions, categories, confusion_matrix_path)
 
     # Train and evaluate Linear SVM
     svm_model, _, _, svm_predictions = train_model(documents, labels, "linear_svc")
-    plot_confusion_matrix(y_test, svm_predictions, categories)
-    plt.savefig("confusion_matrix_linear_svc.png", dpi=300)  # Save the confusion matrix
-
+    confusion_matrix_path = os.path.join(images_dir, "confusion_matrix_linear_svc.png")
+    plot_confusion_matrix(y_test, svm_predictions, categories, confusion_matrix_path)
