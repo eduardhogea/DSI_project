@@ -55,9 +55,18 @@ if __name__ == "__main__":
     labels = newsgroups_train.target
     categories = newsgroups_train.target_names
 
+    # Train and evaluate Naive Bayes
+    nb_model, X_test, y_test, nb_predictions = train_model(documents, labels, "naive_bayes")
+    plot_confusion_matrix(y_test, nb_predictions, categories)
+    plt.savefig("confusion_matrix_naive_bayes.png", dpi=300)  # Save the confusion matrix
 
-    # Train and evaluate each model
-    for model_type in ["naive_bayes", "logistic_regression", "linear_svc"]:
-        model, X_test, y_test, predictions = train_model(documents, labels, model_type)
-        plot_confusion_matrix(y_test, predictions, categories)
+    # Train and evaluate Logistic Regression
+    lr_model, _, _, lr_predictions = train_model(documents, labels, "logistic_regression")
+    plot_confusion_matrix(y_test, lr_predictions, categories)
+    plt.savefig("confusion_matrix_logistic_regression.png", dpi=300)  # Save the confusion matrix
+
+    # Train and evaluate Linear SVM
+    svm_model, _, _, svm_predictions = train_model(documents, labels, "linear_svc")
+    plot_confusion_matrix(y_test, svm_predictions, categories)
+    plt.savefig("confusion_matrix_linear_svc.png", dpi=300)  # Save the confusion matrix
 
