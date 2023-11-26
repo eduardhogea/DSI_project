@@ -19,11 +19,27 @@ This project demonstrates a workflow for creating, training, packaging, and serv
 ## Model Training
 
 ### 1. Machine Learning Framework
-- **Method**: Employ scikit-learn for training a Multinomial Naive Bayes classifier.
-- **Current State**: Model training and evaluation implemented in `classification_model.py`.
+**Method**: Employ scikit-learn for training various classifiers for document classification.
+
+**Models**:
+* Multinomial Naive Bayes
+* Logistic Regression
+* Linear Support Vector Machine (SVM)
+
+**Current State**: Model training for all three classifiers is implemented in classification_model.py. Each model is evaluated on the 20 Newsgroups dataset.
 
 ### 2. Model Evaluation
-- **Implementation**: Evaluate the model's performance using a confusion matrix and classification report.
+**Implementation**: The performance of each model is evaluated using two key methods.
+The evaluation metrics are implemented and displayed in the classification_model.py script, with results printed to the console and confusion matrices saved as PNG files.
+
+1. **Confusion Matrix**: Visual representation of the performance of each classifier. Separate confusion matrices are generated and saved for each model, providing insights into the true positives, false positives, false negatives, and true negatives for each class.
+
+2. **Classification Report**: Includes precision, recall, f1-score, and support for each class. This report is generated for each classifier, providing a detailed view of their performance across different categories.
+
+**Results**:
+- **Naive Bayes**: Demonstrated moderate performance with some variance across different categories.
+- **Logistic Regression**: Showed improved performance over Naive Bayes, with higher precision and recall in most categories.
+- **Linear SVM**: Exhibited the best performance among the three, with high accuracy and balanced precision and recall across various classes.
 
 ## Model Packaging with BentoML
 - **Note**: Future scope for packaging the model using BentoML.
