@@ -1,3 +1,24 @@
+# Table of Contents
+1. [Project Overview](#mlops-for-document-classification-models)
+2. [Team Members](#team-members)
+3. [Data Preparation](#data-preparation)
+   - [Data Collection](#1-data-collection)
+   - [Data Processing](#2-data-processing)
+4. [Model Training](#model-training)
+   - [Machine Learning Framework](#1-machine-learning-framework)
+   - [Model Evaluation](#2-model-evaluation)
+5. [Model Packaging with BentoML](#model-packaging-with-bentoml)
+6. [Configuring BentoML for Data Serialization](#configuring-bentoml-for-data-serialization)
+7. [Model Serving](#model-serving)
+8. [Model Testing](#model-testing)
+9. [Documentation and Presentation](#documentation-and-presentation)
+10. [Suggested Tech Stack](#suggested-tech-stack)
+11. [Repository Structure](#repository-structure)
+12. [Open Issues and Milestones](#open-issues-and-milestones)
+13. [Presentations](#presentations)
+14. [Future Work](#future-work)
+
+
 # MLOps for Document Classification Models
 
 This project demonstrates a workflow for creating, training, packaging, and serving a document classification model, focusing on the 20 Newsgroups dataset. It incorporates machine learning and natural language processing techniques.
