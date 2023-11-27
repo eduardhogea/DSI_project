@@ -1,22 +1,23 @@
 # Table of Contents
 1. [Project Overview](#mlops-for-document-classification-models)
 2. [Team Members](#team-members)
-3. [Data Preparation](#data-preparation)
+3. [Project Directory Structure](#project-directory-structure)
+4. [Data Preparation](#data-preparation)
    - [Data Collection](#1-data-collection)
    - [Data Processing](#2-data-processing)
-4. [Model Training](#model-training)
+5. [Model Training](#model-training)
    - [Machine Learning Framework](#1-machine-learning-framework)
    - [Model Evaluation](#2-model-evaluation)
-5. [Model Packaging with BentoML](#model-packaging-with-bentoml)
-6. [Configuring BentoML for Data Serialization](#configuring-bentoml-for-data-serialization)
-7. [Model Serving](#model-serving)
-8. [Model Testing](#model-testing)
-9. [Documentation and Presentation](#documentation-and-presentation)
-10. [Suggested Tech Stack](#suggested-tech-stack)
-11. [Repository Structure](#repository-structure)
-12. [Open Issues and Milestones](#open-issues-and-milestones)
-13. [Presentations](#presentations)
-14. [Future Work](#future-work)
+6. [Model Packaging with BentoML](#model-packaging-with-bentoml)
+7. [Configuring BentoML for Data Serialization](#configuring-bentoml-for-data-serialization)
+8. [Model Serving](#model-serving)
+9. [Model Testing](#model-testing)
+10. [Documentation and Presentation](#documentation-and-presentation)
+11. [Suggested Tech Stack](#suggested-tech-stack)
+12. [Repository Structure](#repository-structure)
+13. [Open Issues and Milestones](#open-issues-and-milestones)
+14. [Presentations](#presentations)
+15. [Future Work](#future-work)
 
 
 # MLOps for Document Classification Models
@@ -27,6 +28,32 @@ This project demonstrates a workflow for creating, training, packaging, and serv
 - Hogea Eduard
 - Iasmina Popovici
 - Diana Călina
+
+## Project Directory Structure
+Our project is organized into distinct directories, each dedicated to a specific aspect of our work. This structure enhances the project's readability and accessibility.
+
+### Directory Layout and Contents:
+
+#### 1. Data Exploration, Visualization, and Preprocessing
+This directory contains scripts and notebooks for initial data handling, including fetching, preprocessing, and exploratory analysis.
+- `fetch_dataset.py`: Script for downloading and loading the dataset.
+- `advanced_preprocess.py`: Advanced data preprocessing functions.
+- `exploration.ipynb`: Jupyter notebook for data exploration and visualization.
+
+#### 2. Feature Engineering
+Dedicated to scripts that focus on extracting and handling features from the data.
+- `feature_extraction.py`: Script for extracting and managing features for model training.
+
+#### 3. Model Development
+Houses scripts related to the development and testing of machine learning models.
+- `classification_model.py`: Script for building and training the classification model.
+- `zero_shot_transformer.py`: Script for implementing and experimenting with a zero-shot learning model.
+
+
+#### 4. Images
+Contains generated images, such as model outputs and visualizations.
+- Images related to model evaluation like confusion matrices are stored here for reference and documentation purposes.
+
 
 ## Data Preparation
 
