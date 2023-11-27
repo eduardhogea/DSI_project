@@ -111,12 +111,6 @@ The evaluation metrics are implemented and displayed in the classification_model
 - **Model Packaging and Serving**: BentoML (future)
 - **Client for Testing**: Python client (future)
 
-## Repository Structure
-- `advanced_preprocess.py`: Text preprocessing functions.
-- `classification_model.py`: Model training and evaluation.
-- `feature_extraction.py`: Feature extraction using TF-IDF.
-- `fetch_dataset.py`: Script for fetching the 20 Newsgroups dataset.
-- `exploration.ipynb`: Jupyter notebook for dataset analysis and visualization.
 
 ## Open Issues and Milestones
 - **Issue 9**: Development of a Python Client for Document Handling and API Interaction. Milestone 3 (Deadline: 09.01.2024).
