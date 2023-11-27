@@ -34,17 +34,17 @@ Our project is organized into distinct directories, each dedicated to a specific
 
 ### Directory Layout and Contents:
 
-#### 1. Data Exploration, Visualization, and Preprocessing
+#### 1. Data_Preprocessing_and_Analysis
 This directory contains scripts and notebooks for initial data handling, including fetching, preprocessing, and exploratory analysis.
 - `fetch_dataset.py`: Script for downloading and loading the dataset.
 - `advanced_preprocess.py`: Advanced data preprocessing functions.
 - `exploration.ipynb`: Jupyter notebook for data exploration and visualization.
 
-#### 2. Feature Engineering
+#### 2. Feature_Engineering
 Dedicated to scripts that focus on extracting and handling features from the data.
 - `feature_extraction.py`: Script for extracting and managing features for model training.
 
-#### 3. Model Development
+#### 3. Model_Development
 Houses scripts related to the development and testing of machine learning models.
 - `classification_model.py`: Script for building and training the classification model.
 - `zero_shot_transformer.py`: Script for implementing and experimenting with a zero-shot learning model.
