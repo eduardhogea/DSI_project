@@ -6,6 +6,7 @@ import docx
 import json
 from zero_shot_transformer import ZeroShotClassifier
 import threading
+import os
 
 # Initialize the classifier
 zero_shot_classifier = ZeroShotClassifier()
@@ -45,8 +46,11 @@ def extract_text_from_txt(file_path):
     return text
 
 def save_text_as_json(text, output_file):
-    with open(output_file, 'w') as f:
+    output_folder = 'Data Preprocessing and Analysis'  # Replace with the actual path
+    output_path = os.path.join(output_folder, output_file)
+    with open(output_path, 'w') as f:
         json.dump({"content": text}, f, indent=4)
+
 
 def browse_files():
     filetypes = (('PDF files', '*.pdf'), ('Word files', '*.docx'), ('Text files', '*.txt'), ('All files', '*.*'))
