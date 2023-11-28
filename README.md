@@ -1,22 +1,23 @@
 # Table of Contents
 1. [Project Overview](#mlops-for-document-classification-models)
 2. [Team Members](#team-members)
-3. [Data Preparation](#data-preparation)
+3. [Project Directory Structure](#project-directory-structure)
+4. [Data Preparation](#data-preparation)
    - [Data Collection](#1-data-collection)
    - [Data Processing](#2-data-processing)
-4. [Model Training](#model-training)
+5. [Model Training](#model-training)
    - [Machine Learning Framework](#1-machine-learning-framework)
    - [Model Evaluation](#2-model-evaluation)
-5. [Model Packaging with BentoML](#model-packaging-with-bentoml)
-6. [Configuring BentoML for Data Serialization](#configuring-bentoml-for-data-serialization)
-7. [Model Serving](#model-serving)
-8. [Model Testing](#model-testing)
-9. [Documentation and Presentation](#documentation-and-presentation)
-10. [Suggested Tech Stack](#suggested-tech-stack)
-11. [Repository Structure](#repository-structure)
-12. [Open Issues and Milestones](#open-issues-and-milestones)
-13. [Presentations](#presentations)
-14. [Future Work](#future-work)
+6. [Model Packaging with BentoML](#model-packaging-with-bentoml)
+7. [Configuring BentoML for Data Serialization](#configuring-bentoml-for-data-serialization)
+8. [Model Serving](#model-serving)
+9. [Model Testing](#model-testing)
+10. [Documentation and Presentation](#documentation-and-presentation)
+11. [Suggested Tech Stack](#suggested-tech-stack)
+12. [Repository Structure](#repository-structure)
+13. [Open Issues and Milestones](#open-issues-and-milestones)
+14. [Presentations](#presentations)
+15. [Future Work](#future-work)
 
 
 # MLOps for Document Classification Models
@@ -27,6 +28,32 @@ This project demonstrates a workflow for creating, training, packaging, and serv
 - Hogea Eduard
 - Iasmina Popovici
 - Diana Călina
+
+## Project Directory Structure
+Our project is organized into distinct directories, each dedicated to a specific aspect of our work. This structure enhances the project's readability and accessibility.
+
+### Directory Layout and Contents:
+
+#### 1. Data_Preprocessing_and_Analysis
+This directory contains scripts and notebooks for initial data handling, including fetching, preprocessing, and exploratory analysis.
+- `fetch_dataset.py`: Script for downloading and loading the dataset.
+- `advanced_preprocess.py`: Advanced data preprocessing functions.
+- `exploration.ipynb`: Jupyter notebook for data exploration and visualization.
+
+#### 2. Feature_Engineering
+Dedicated to scripts that focus on extracting and handling features from the data.
+- `feature_extraction.py`: Script for extracting and managing features for model training.
+
+#### 3. Model_Development
+Houses scripts related to the development and testing of machine learning models.
+- `classification_model.py`: Script for building and training the classification model.
+- `zero_shot_transformer.py`: Script for implementing and experimenting with a zero-shot learning model.
+
+
+#### 4. Images
+Contains generated images, such as model outputs and visualizations.
+- Images related to model evaluation like confusion matrices are stored here for reference and documentation purposes.
+
 
 ## Data Preparation
 
@@ -62,6 +89,59 @@ The evaluation metrics are implemented and displayed in the classification_model
 - **Logistic Regression**: Showed improved performance over Naive Bayes, with higher precision and recall in most categories.
 - **Linear SVM**: Exhibited the best performance among the three, with high accuracy and balanced precision and recall across various classes.
 
+
+### Zero Shot Transformer
+
+#### Overview:
+The Zero Shot Transformer is an integral part of our document classification project. It utilizes the Hugging Face Transformers library to perform classification tasks without labeled training data. It leverages the 'typeform/distilbert-base-uncased-mnli' model, a distilled version of BERT fine-tuned on the MultiNLI dataset, to infer the probabilities of different categories or labels for a given text. 
+
+#### Features:
+- **Zero-Shot Learning**: Employs a state-of-the-art approach to classify texts into predefined or dynamic categories without needing training data for each category.
+- **Flexibility**: Supports various transformer models, allowing for custom selection based on specific project needs or constraints.
+- **Ease of Use**:  Incorporated into a Tkinter GUI Application, it provides an intuitive drag-and-drop and browse functionality for easy file input and classification.
+- **Efficiency**: Capable of extracting and classifying text from multiple file formats (PDF, DOCX, TXT), enhancing the workflow efficiency.
+
+
+##### Prerequisites:
+To use the Zero Shot Transformer Classifier, ensure the following prerequisites are met:
+- Python (version 3.6 or newer)
+- Hugging Face Transformers library
+
+
+#### Implementation Details
+The Zero Shot Classifier is implemented as a Python class, which handles the loading and utilization of the pre-trained DistilBERT model. 
+This design ensures a smooth and efficient user experience.
+
+#### Usage
+Utilizing the Zero Shot Classifier involves providing the text and a selection of candidate labels. The classifier then evaluates and predicts the relevance of each label to the text, offering clear insights into the most fitting categories.
+In our project, text extracted from various file formats (PDF, DOCX, TXT) is classified using the Zero Shot Classifier in a Tkinter GUI Application that provides an intuitive interface for the classifying task. Here is how to use it:
+1. **Start the Application:**
+- Run the script to open the Tkinter GUI window.
+- The title of the window is 'Drag and Drop File Converter'. 
+
+2. **File Input:**
+- Drag and Drop: Simply drag a PDF, DOCX, or TXT file and drop it into the designated area in the GUI.
+- Browse and Select: Click the "Browse" button to open a file dialog, navigate to your desired file, and select it.
+
+3. **Automatic Text Extraction and Classification:**
+- Once a file is input, the application automatically extracts the text from the file.
+- The extracted text is then classified using the Zero Shot Classifier.
+- The classifier is pre-configured with a diverse set of candidate labels such as "Art", "Science", "Technology", "Business", etc.
+
+4. **Viewing the Classification Results:**
+- The classification results, including the most probable category and its confidence score, are displayed in a text area within the GUI.
+- For instance, if you input a news article about technology, the classifier might display a result such as "Label: Technology, Score: 0.92".
+
+5. **Multithreaded Operation:**
+- The classification task runs in a separate thread, ensuring the GUI remains responsive during the processing.
+
+
+#### Benefits:
+- **Enhanced Accuracy**: The Zero Shot Transformer Classifier brings unparalleled accuracy to our document classification tasks, ensuring precise categorization even in complex scenarios.
+- **Scalability and Adaptability**: Its ability to adapt to a wide range of text types and categories makes it an indispensable tool in our ever-evolving project landscape.
+- **Innovative Edge**: Employing this state-of-the-art technology positions our project at the forefront of NLP innovation, granting us a competitive edge in the field.
+- **Data Privacy and Compliance**: The zero-shot approach significantly mitigates data privacy concerns, as it negates the necessity for large, potentially sensitive training datasets.
+
 ## Model Packaging with BentoML
 - **Note**: Future scope for packaging the model using BentoML.
 
@@ -84,12 +164,6 @@ The evaluation metrics are implemented and displayed in the classification_model
 - **Model Packaging and Serving**: BentoML (future)
 - **Client for Testing**: Python client (future)
 
-## Repository Structure
-- `advanced_preprocess.py`: Text preprocessing functions.
-- `classification_model.py`: Model training and evaluation.
-- `feature_extraction.py`: Feature extraction using TF-IDF.
-- `fetch_dataset.py`: Script for fetching the 20 Newsgroups dataset.
-- `exploration.ipynb`: Jupyter notebook for dataset analysis and visualization.
 
 ## Open Issues and Milestones
 - **Issue 9**: Development of a Python Client for Document Handling and API Interaction. Milestone 3 (Deadline: 09.01.2024).
