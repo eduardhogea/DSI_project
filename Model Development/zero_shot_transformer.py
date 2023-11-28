@@ -1,19 +1,25 @@
-from transformers import pipeline
-from sklearn.datasets import fetch_20newsgroups
+from transformers import pipeline, AutoModelForSequenceClassification, AutoTokenizer
+import os
 
-def zero_shot_classification(documents, categories):
-    classifier = pipeline("zero-shot-classification")
-    
-    for doc in documents[:5]:  # Limiting to first 5 documents for demonstration
-        result = classifier(doc, candidate_labels=categories)
-        print(f"Document: {doc[:100]}...")  # Displaying first 100 characters of the document
-        print("Predicted Category:", result['labels'][0], "\n")  # Top predicted category
+class ZeroShotClassifier:
+    def __init__(self, model_name="typeform/distilbert-base-uncased-mnli", save_dir="model"):
+        self.model_name = model_name
+        self.save_dir = save_dir
+        self.classifier = self.load_model()
 
-if __name__ == "__main__":
-    # Load the 20 Newsgroups dataset
-    newsgroups_train = fetch_20newsgroups(subset='train', remove=('headers', 'footers', 'quotes'))
-    documents = newsgroups_train.data
-    categories = newsgroups_train.target_names
+    def load_model(self):
+        if os.path.exists(self.save_dir):
+            # Load model from saved directory
+            model = AutoModelForSequenceClassification.from_pretrained(self.save_dir)
+            tokenizer = AutoTokenizer.from_pretrained(self.save_dir)
+        else:
+            # Download and save the model and tokenizer
+            model = AutoModelForSequenceClassification.from_pretrained(self.model_name)
+            tokenizer = AutoTokenizer.from_pretrained(self.model_name)
+            model.save_pretrained(self.save_dir)
+            tokenizer.save_pretrained(self.save_dir)
 
-    # Perform zero-shot classification
-    zero_shot_classification(documents, categories)
+        return pipeline("zero-shot-classification", model=model, tokenizer=tokenizer)
+
+    def classify(self, text, candidate_labels):
+        return self.classifier(text, candidate_labels)
