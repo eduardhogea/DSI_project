@@ -4,7 +4,7 @@ from tkinter import filedialog, scrolledtext
 from PyPDF2 import PdfReader
 import docx
 import json
-from zero_shot_transformer import ZeroShotClassifier
+from Model_Development.zero_shot_transformer import ZeroShotClassifier
 import threading
 import os
 
@@ -46,7 +46,7 @@ def extract_text_from_txt(file_path):
     return text
 
 def save_text_as_json(text, output_file):
-    output_folder = 'Data Preprocessing and Analysis'  # Replace with the actual path
+    output_folder = 'Data_Preprocessing_and_Analysis'  # Replace with the actual path
     output_path = os.path.join(output_folder, output_file)
     with open(output_path, 'w') as f:
         json.dump({"content": text}, f, indent=4)
