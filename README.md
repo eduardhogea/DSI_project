@@ -98,8 +98,8 @@ The Zero Shot Transformer is an integral part of our document classification pro
 #### Features:
 - **Zero-Shot Learning**: Employs a state-of-the-art approach to classify texts into predefined or dynamic categories without needing training data for each category.
 - **Flexibility**: Supports various transformer models, allowing for custom selection based on specific project needs or constraints.
-- **Ease of Use**: Simple and intuitive interface for classifying any given text.
-- **Efficiency**: Saves time and resources by eliminating the need for collecting and annotating a large dataset.
+- **Ease of Use**:  Incorporated into a Tkinter GUI Application, it provides an intuitive drag-and-drop and browse functionality for easy file input and classification.
+- **Efficiency**: Capable of extracting and classifying text from multiple file formats (PDF, DOCX, TXT), enhancing the workflow efficiency.
 
 
 ##### Prerequisites:
