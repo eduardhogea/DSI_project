@@ -4,7 +4,7 @@ import os
 # we need to go up one level to the parent directory and then into the 'Data preprocessing and analysis' directory
 script_dir = os.path.dirname(__file__)  # Gets the directory where the script is located
 parent_dir = os.path.dirname(script_dir)  # Gets the parent directory
-target_dir = os.path.join(parent_dir, "Data preprocessing and analysis")  # Path to the target directory
+target_dir = os.path.join(parent_dir, "Data_preprocessing_and_analysis")  # Path to the target directory
 sys.path.append(target_dir)
 
 
