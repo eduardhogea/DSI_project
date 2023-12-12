@@ -3,7 +3,7 @@ import os
 
 script_dir = os.path.dirname(__file__)                             # The directory of the current script
 parent_dir = os.path.dirname(script_dir)                           # Path to the parent directory
-feature_eng_dir = os.path.join(parent_dir, "Feature Engineering")  # Path to the "Feature Engineering" directory
+feature_eng_dir = os.path.join(parent_dir, "Feature_Engineering")  # Path to the "Feature Engineering" directory
 images_dir = os.path.join(parent_dir, "Images")                    # Path to the "Images" directory
 sys.path.append(feature_eng_dir)                                   # Append the directory to sys.path
 

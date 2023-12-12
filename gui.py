@@ -3,13 +3,9 @@ from tkinterdnd2 import DND_FILES, TkinterDnD
 from tkinter import filedialog, scrolledtext
 from PyPDF2 import PdfReader
 import docx
-import json
-from Model_Development.zero_shot_transformer import ZeroShotClassifier
 import threading
 import os
-
-# Initialize the classifier
-zero_shot_classifier = ZeroShotClassifier()
+import requests  # For making HTTP requests to the BentoML service
 
 def handle_file_drop(event):
     process_file(event.data)
@@ -24,7 +20,6 @@ def process_file(file_path):
     else:
         text = "Unsupported file format"
     
-    save_text_as_json(text, 'output.json')
     classify_and_update_gui(text)
 
 def extract_text_from_pdf(file_path):
@@ -45,21 +40,9 @@ def extract_text_from_txt(file_path):
         text = file.read()
     return text
 
-def save_text_as_json(text, output_file):
-    output_folder = 'Data_Preprocessing_and_Analysis'  # Replace with the actual path
-    output_path = os.path.join(output_folder, output_file)
-    with open(output_path, 'w') as f:
-        json.dump({"content": text}, f, indent=4)
-
-
-def browse_files():
-    filetypes = (('PDF files', '*.pdf'), ('Word files', '*.docx'), ('Text files', '*.txt'), ('All files', '*.*'))
-    filename = filedialog.askopenfilename(title='Open a file', initialdir='/', filetypes=filetypes)
-    if filename:
-        process_file(filename)
-
 def classify_and_update_gui(text):
     def classification_task():
+        url = "http://localhost:3000/classify"
         candidate_labels = [
             "Art", "Science", "Technology", "Business", "Health",
             "Education", "Environment", "Politics", "Sports", "Entertainment",
@@ -68,12 +51,35 @@ def classify_and_update_gui(text):
             "Law", "Social Issues", "Psychology", "Mathematics", "Engineering",
             "Biology", "Medicine", "Economics", "Film", "Marketing"
         ]
+        data = {
+            "text": text,
+            "candidate_labels": candidate_labels
+        }
 
-        result = zero_shot_classifier.classify(text, candidate_labels)
-        result_text = f"\nClassification:\nLabel: {result['labels'][0]}, Score: {result['scores'][0]:.4f}"
+        try:
+            response = requests.post(url, json=data)
+            response.raise_for_status()
+            result = response.json()
 
-        # Update the GUI with the result
-        # Ensure the update is done in the main thread
+            labels, scores = result
+            scores = [float(score) for score in scores]  # Convert scores to float
+
+            # Finding the label with the highest score
+            max_score = max(scores)
+            max_label = labels[scores.index(max_score)]
+
+            # Snippet from the text (e.g., first 100 characters)
+            text_snippet = text[:100] + '...' if len(text) > 100 else text
+
+            # Construct the result text
+            result_text = f"Classification:\n{text_snippet}\n\nTop Category: {max_label}, Score: {max_score:.4f}\n\nFull Classification:\n"
+            for label, score in zip(labels, scores):
+                result_text += f"Label: {label}, Score: {score:.4f}\n"
+        except requests.exceptions.HTTPError as http_err:
+            result_text = f"HTTP error occurred: {http_err}\nResponse content: {response.content}"
+        except Exception as err:
+            result_text = f"Other error occurred: {err}"
+
         def update_gui():
             result_display.config(state=tk.NORMAL)
             result_display.delete('1.0', tk.END)
@@ -82,9 +88,13 @@ def classify_and_update_gui(text):
 
         root.after(0, update_gui)
 
-    # Start the classification in a new thread
     threading.Thread(target=classification_task).start()
 
+def browse_files():
+    filetypes = (('PDF files', '*.pdf'), ('Word files', '*.docx'), ('Text files', '*.txt'), ('All files', '*.*'))
+    filename = filedialog.askopenfilename(title='Open a file', initialdir='/', filetypes=filetypes)
+    if filename:
+        process_file(filename)
 
 root = TkinterDnD.Tk()
 root.title('Drag and Drop File Converter')
@@ -102,3 +112,4 @@ result_display = tk.scrolledtext.ScrolledText(root, state=tk.DISABLED, height=10
 result_display.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
 
 root.mainloop()
+
