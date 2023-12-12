@@ -146,10 +146,45 @@ In our project, text extracted from various file formats (PDF, DOCX, TXT) is cla
 - **Data Privacy and Compliance**: The zero-shot approach significantly mitigates data privacy concerns, as it negates the necessity for large, potentially sensitive training datasets.
 
 ## Model Packaging with BentoML
-- **Note**: Future scope for packaging the model using BentoML.
+### Overview
+In our project, we utilize BentoML for efficient model packaging and serving. BentoML is an open-source framework that simplifies model serving, making it easier to deploy machine learning models into production.
+
+### Features
+- **Efficient Model Serving**: BentoML provides a streamlined approach for serving models, handling requests efficiently with built-in support for batching and micro-batching.
+- **Flexible Data Handling**: With support for various data formats, BentoML makes it easy to process inputs and outputs in different formats like JSON, images, and Numpy arrays.
+- **Adaptive Model Runners**: BentoML's runners allow for optimized model inference, handling concurrency and resource management effectively.
+
+###  Prerequisites
+- **Python Environment**: A Python environment with BentoML and its dependencies installed.
+- **Model and Data**: Pre-trained model files and data processing scripts compatible with BentoML's framework.
+
+### Implementation details
+In our implementation, we use the service.py script, which plays a critical role in defining and configuring the BentoML service.
+- **Service Definition**: The service.py script defines a BentoML service named zero_shot_classifier_service. This service is tailored to our specific model, handling inference requests and managing data serialization.
+- **Data Serialization Configuration**: We configure the service to handle JSON and Numpy array data formats, ensuring compatibility with our model's input and output specifications.
+
 
 ## Configuring BentoML for Data Serialization
-- **Note**: Future scope for configuring BentoML to handle JSON and Multi-Part serialization.
+Data serialization is a critical component in machine learning services, determining how data is converted into a format suitable for transmission over a network and then deserialized back into a usable format. In our project, we have configured BentoML to handle this process efficiently, ensuring that our model can interpret the incoming data correctly and that the outputs are in a user-friendly format.
+
+### Key Components in Data Serialization Configuration:
+- **Data Format Selection**
+We have configured our BentoML service to accept inputs in JSON and Numpy array formats. JSON is used for its simplicity and ubiquity in web applications, while Numpy arrays are essential for numerical data typically used in machine learning models.
+- **Utilizing BentoML's Serialization Tools**
+BentoML offers a variety of serialization tools such as bentoml.io.JSON and bentoml.io.NumpyNdarray. These tools make it easy to define the expected input and output formats for the model.
+- **Input and Output Configuration**
+n the service.py file, we configure our model to receive inputs in the specified formats. For instance, a client can send a JSON object, which BentoML will deserialize into a Python object for the model to process. Similarly, the model's output is serialized back into the chosen format (JSON or Numpy array) before being sent back to the client.
+
+### Benefits of our approach 
+- **Flexibility and Compatibility**:  By supporting multiple data formats, our service can easily integrate with various client applications, making it more versatile.
+- **Efficiency**: With BentoML's built-in serialization tools, the conversion process is streamlined, reducing overhead and improving response times.
+- **Ease of Use**: This setup simplifies the process for end-users or client applications, as they can interact with our service using familiar data formats.
+- **Consistent API**: The standardized API format of BentoML ensures a consistent interface for model serving, simplifying integration with different systems.
+
+## Usage
+- When sending a request to our service, clients need to ensure that the data is in the correct format (either JSON or Numpy array).
+- The service will automatically handle the serialization and deserialization processes, allowing the model to process the data and return the results seamlessly.
+
 
 ## Model Serving
 - **Note**: Future scope for setting up a BentoML server and creating an API endpoint.
@@ -181,7 +216,7 @@ In our project, text extracted from various file formats (PDF, DOCX, TXT) is cla
 
 ## Presentations
 - **Milestone 1 Presentation** (Deadline: 28.11.2023): [View Presentation](https://docs.google.com/presentation/d/1ViKHCMRyTVjxCQlsLhDuiJC7XtjG7_u1FhZ6M06_4JU/edit?usp=sharing)
-- **Milestone 2 Presentation** (Deadline: 12.12.2023): *Link to be provided*
+- **Milestone 2 Presentation** (Deadline: 12.12.2023): [View Presentation](https://docs.google.com/presentation/d/1xVbAxn8igkAqN0FpJJ7Ypyx6f0Dw2WGvtSc2nfSI5uE/edit#slide=id.g2a602b6ec67_0_0)
 - **Milestone 3 Presentation** (Deadline: 09.01.2024): *Link to be provided*
 - **Final Project Presentation**: *Link to be provided*
 
