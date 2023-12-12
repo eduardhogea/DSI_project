@@ -5,18 +5,13 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.8", "3.9", "3.10"]
     steps:
     - uses: actions/checkout@v3
     - name: Set up Miniconda
       uses: conda-incubator/setup-miniconda@v2
       with:
-        activate-environment: myenv
         environment-file: environment.yml
-        python-version: ${{ matrix.python-version }}
-        auto-activate-base: false
+        auto-activate-base: true
     - name: Install Pylint
       run: conda install -c conda-forge pylint
     - name: Analysing the code with pylint
