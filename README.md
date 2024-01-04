@@ -25,7 +25,7 @@
 This project demonstrates a workflow for creating, training, packaging, and serving a document classification model, focusing on the 20 Newsgroups dataset. It incorporates machine learning and natural language processing techniques.
 
 ## UML Diagram
-![UML Diagram](Images/MLOps_new.png "Project UML Diagram")
+![UML Diagram](Images/MLOps_new.svg "Project UML Diagram")
 
 ## Team Members
 - Hogea Eduard
