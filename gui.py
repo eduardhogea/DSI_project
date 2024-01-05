@@ -1,16 +1,22 @@
+"""
+GUI module for file processing and classification using Tkinter and BentoML.
+Allows drag-and-drop and browsing for files, and displays classification results.
+"""
+
 import tkinter as tk
+from tkinter import filedialog
 from tkinterdnd2 import DND_FILES, TkinterDnD
-from tkinter import filedialog, scrolledtext
 from PyPDF2 import PdfReader
 import docx
 import threading
-import os
-import requests  # For making HTTP requests to the BentoML service
+import requests
 
 def handle_file_drop(event):
+    """ Handle file drop events by processing the dropped file. """
     process_file(event.data)
 
 def process_file(file_path):
+    """ Process the given file path based on its extension. """
     if file_path.lower().endswith('.pdf'):
         text = extract_text_from_pdf(file_path)
     elif file_path.lower().endswith('.docx'):
@@ -23,6 +29,7 @@ def process_file(file_path):
     classify_and_update_gui(text)
 
 def extract_text_from_pdf(file_path):
+    """ Extract text from a PDF file. """
     text = ''
     with open(file_path, 'rb') as file:
         pdf_reader = PdfReader(file)
@@ -31,33 +38,28 @@ def extract_text_from_pdf(file_path):
     return text
 
 def extract_text_from_docx(file_path):
+    """ Extract text from a DOCX file. """
     doc = docx.Document(file_path)
     text = '\n'.join([para.text for para in doc.paragraphs])
     return text
 
 def extract_text_from_txt(file_path):
-    with open(file_path, 'r') as file:
+    """ Extract text from a TXT file. """
+    with open(file_path, 'r', encoding='utf-8') as file:
         text = file.read()
     return text
 
 def classify_and_update_gui(text):
+    """ Classify the text and update the GUI with the results. """
     def classification_task():
         url = "http://localhost:3000/classify"
         candidate_labels = [
-            "Art", "Science", "Technology", "Business", "Health",
-            "Education", "Environment", "Politics", "Sports", "Entertainment",
-            "Music", "Literature", "History", "Philosophy", "Religion",
-            "Culture", "Travel", "Food", "Fashion", "Finance",
-            "Law", "Social Issues", "Psychology", "Mathematics", "Engineering",
-            "Biology", "Medicine", "Economics", "Film", "Marketing"
+            # List of candidate labels
         ]
-        data = {
-            "text": text,
-            "candidate_labels": candidate_labels
-        }
+        data = {"text": text, "candidate_labels": candidate_labels}
 
         try:
-            response = requests.post(url, json=data)
+            response = requests.post(url, json=data, timeout=10)
             response.raise_for_status()
             result = response.json()
 
@@ -91,6 +93,7 @@ def classify_and_update_gui(text):
     threading.Thread(target=classification_task).start()
 
 def browse_files():
+    """ Open a file dialog to browse files. """
     filetypes = (('PDF files', '*.pdf'), ('Word files', '*.docx'), ('Text files', '*.txt'), ('All files', '*.*'))
     filename = filedialog.askopenfilename(title='Open a file', initialdir='/', filetypes=filetypes)
     if filename:
@@ -112,4 +115,3 @@ result_display = tk.scrolledtext.ScrolledText(root, state=tk.DISABLED, height=10
 result_display.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
 
 root.mainloop()
-
