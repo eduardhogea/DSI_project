@@ -1,27 +1,39 @@
+"""
+Module for feature extraction from text data using TF-IDF Vectorizer.
+It includes a function to extract features from a given set of documents.
+"""
+
 import sys
 import os
+from sklearn.feature_extraction.text import TfidfVectorizer
+from Data_preprocessing_and_analysis.advanced_preprocess import advanced_preprocess_text
+from sklearn.datasets import fetch_20newsgroups
 
-# we need to go up one level to the parent directory and then into the 'Data preprocessing and analysis' directory
+# Update sys.path to include the target directory for imports
 script_dir = os.path.dirname(__file__)  # Gets the directory where the script is located
 parent_dir = os.path.dirname(script_dir)  # Gets the parent directory
 target_dir = os.path.join(parent_dir, "Data_preprocessing_and_analysis")  # Path to the target directory
 sys.path.append(target_dir)
 
+def extract_features(docs):
+    """
+    Extracts TF-IDF features from the provided documents.
 
-from sklearn.feature_extraction.text import TfidfVectorizer
-from advanced_preprocess import advanced_preprocess_text
-from sklearn.datasets import fetch_20newsgroups
+    Args:
+    docs (list of str): List of documents to extract features from.
 
-def extract_features(documents):
-    vectorizer = TfidfVectorizer(preprocessor=advanced_preprocess_text)
-    features = vectorizer.fit_transform(documents)
-    return features, vectorizer
+    Returns:
+    tuple: Tuple containing the feature matrix and the vectorizer.
+    """
+    vect = TfidfVectorizer(preprocessor=advanced_preprocess_text)
+    feats = vect.fit_transform(docs)
+    return feats, vect
 
 if __name__ == "__main__":
     # Load a sample of the 20 Newsgroups dataset
     newsgroups_train = fetch_20newsgroups(subset='train', remove=('headers', 'footers', 'quotes'))
-    documents = newsgroups_train.data
+    docs = newsgroups_train.data
 
     # Extract features
-    features, vectorizer = extract_features(documents[:100])  # Limiting to first 100 documents for demonstration
-    print("Feature shape:", features.shape)
+    extracted_features, vectorizer = extract_features(docs[:100])  # Limiting to first 100 documents for demonstration
+    print("Feature shape:", extracted_features.shape)
