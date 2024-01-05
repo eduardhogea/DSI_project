@@ -1,8 +1,3 @@
-"""
-Module for creating and serving a machine learning model using BentoML.
-It includes a ZeroShotClassifier class and an API endpoint for model inference.
-"""
-
 import os
 import numpy as np
 import bentoml
@@ -12,19 +7,24 @@ from transformers import pipeline, AutoModelForSequenceClassification, AutoToken
 
 class ZeroShotClassifier:
     """
-    Classifier for zero-shot learning using Hugging Face's transformers.
+    A classifier for zero-shot learning using Hugging Face's transformers.
+    This class supports different transformer models.
 
     Attributes:
-    model_name (str): Name of the model to be used.
-    save_dir (str): Directory to save the model.
-    classifier (transformers.Pipeline): The loaded classification model.
+        model_name (str): Name of the model to be used.
+        save_dir (str): Directory to save the model.
+        classifier (transformers.Pipeline): The loaded classification model.
     """
-    def __init__(self, model_name="typeform/distilbert-base-uncased-mnli", save_dir="model"):
+    def __init__(self, model_name, save_dir="model"):
         """
-        Initialize the ZeroShotClassifier with a model name and save directory.
+        Initialize the classifier with a specified transformer model.
+
+        Args:
+            model_name (str): The name of the transformer model to use.
+            save_dir (str): The directory to save the model.
         """
         self.model_name = model_name
-        self.save_dir = save_dir
+        self.save_dir = os.path.join(save_dir, model_name.replace('/', '_'))
         self.classifier = self.load_model()
 
     def load_model(self):
@@ -32,7 +32,7 @@ class ZeroShotClassifier:
         Load the model from the specified directory or download it if not present.
         
         Returns:
-        transformers.Pipeline: The loaded zero-shot classification pipeline.
+            transformers.Pipeline: The loaded zero-shot classification pipeline.
         """
         if os.path.exists(self.save_dir):
             model = AutoModelForSequenceClassification.from_pretrained(self.save_dir)
@@ -49,24 +49,22 @@ class ZeroShotClassifier:
         Classify the given text against a set of candidate labels.
 
         Args:
-        text (str): The text to classify.
-        candidate_labels (list of str): The candidate labels for classification.
+            text (str): The text to classify.
+            candidate_labels (list of str): The candidate labels for classification.
 
         Returns:
-        dict: Classification results with labels and scores.
+            dict: Classification results with labels and scores.
         """
         return self.classifier(text, candidate_labels)
 
-# Load your ZeroShotClassifier instance
-zero_shot_classifier = ZeroShotClassifier()
-
+# Pydantic model for input validation
 class ClassificationInput(BaseModel):
     """
     Pydantic model for input validation in the API endpoint.
 
     Attributes:
-    text (str): The text to classify.
-    candidate_labels (list of str): The candidate labels for classification.
+        text (str): The text to classify.
+        candidate_labels (list of str): The candidate labels for classification.
     """
     text: str
     candidate_labels: list[str]
@@ -74,27 +72,31 @@ class ClassificationInput(BaseModel):
 input_spec = JSON(pydantic_model=ClassificationInput)
 
 # Initialize BentoML service
-svc = bentoml.Service("zero_shot_classifier_service", runners=[])
+svc = bentoml.Service("multi_model_classifier_service", runners=[])
 
-@svc.api(input=input_spec, output=NumpyNdarray())
-def classify(input_data: ClassificationInput) -> np.ndarray:
-    """
-    API endpoint for classifying text using the ZeroShotClassifier.
-
-    Args:
-    input_data (ClassificationInput): The input data with text and candidate labels.
-
-    Returns:
-    np.ndarray: The classification results including labels and scores.
-    """
+# Helper function to classify text using a specified model
+def classify_with_model(model_name, input_data):
+    classifier = ZeroShotClassifier(model_name)
     text = str(input_data.text)
     candidate_labels = input_data.candidate_labels
-
-    # Use the ZeroShotClassifier's classify method for inference
-    result = zero_shot_classifier.classify(text, candidate_labels)
-
-    # Assuming result is a dictionary with keys 'labels' and 'scores'
+    result = classifier.classify(text, candidate_labels)
     labels = result.get('labels', [])
     scores = result.get('scores', [])
-    
     return np.array([labels, scores])
+
+# Endpoints for different models
+@svc.api(input=input_spec, output=NumpyNdarray())
+def classify_distilbert(input_data: ClassificationInput) -> np.ndarray:
+    return classify_with_model("typeform/distilbert-base-uncased-mnli", input_data)
+
+@svc.api(input=input_spec, output=NumpyNdarray())
+def classify_mobilebert(input_data: ClassificationInput) -> np.ndarray:
+    return classify_with_model("typeform/mobilebert-uncased-mnli", input_data)
+
+@svc.api(input=input_spec, output=NumpyNdarray())
+def classify_roberta_large(input_data: ClassificationInput) -> np.ndarray:
+    return classify_with_model("typeform/roberta-large-mnli", input_data)
+
+@svc.api(input=input_spec, output=NumpyNdarray())
+def classify_squeezebert(input_data: ClassificationInput) -> np.ndarray:
+    return classify_with_model("typeform/squeezebert-mnli", input_data)
