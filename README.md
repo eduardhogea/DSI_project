@@ -219,7 +219,7 @@ n the service.py file, we configure our model to receive inputs in the specified
 ## Presentations
 - **Milestone 1 Presentation** (Deadline: 28.11.2023): [View Presentation](https://docs.google.com/presentation/d/1ViKHCMRyTVjxCQlsLhDuiJC7XtjG7_u1FhZ6M06_4JU/edit?usp=sharing)
 - **Milestone 2 Presentation** (Deadline: 12.12.2023): [View Presentation](https://docs.google.com/presentation/d/1xVbAxn8igkAqN0FpJJ7Ypyx6f0Dw2WGvtSc2nfSI5uE/edit#slide=id.g2a602b6ec67_0_0)
-- **Milestone 3 Presentation** (Deadline: 09.01.2024): *Link to be provided*
+- **Milestone 3 Presentation** (Deadline: 09.01.2024): [View Presentation](https://docs.google.com/presentation/d/1spmbNwVFeCxn_9IpIph1D-SG6kGZFu5ZwRyb0OMrCcc/edit#slide=id.g2a602b6ec67_0_378)
 - **Final Project Presentation**: *Link to be provided*
 
 ## Future Work
