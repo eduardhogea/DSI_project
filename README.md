@@ -27,6 +27,8 @@ This project demonstrates a workflow for creating, training, packaging, and serv
 ## UML Diagram
 ![UML Diagram](Images/MLOps_new.svg "Project UML Diagram")
 
+![Running the app](Images/working_HD.gif "Project working flow")
+
 ## Team Members
 - Hogea Eduard
 - Iasmina Popovici
