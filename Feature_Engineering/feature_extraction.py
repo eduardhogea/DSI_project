@@ -6,13 +6,13 @@ It includes a function to extract features from a given set of documents.
 import sys
 import os
 from sklearn.feature_extraction.text import TfidfVectorizer
-from Data_preprocessing_and_analysis.advanced_preprocess import advanced_preprocess_text
+from Data_Preprocessing_and_Analysis.advanced_preprocess import advanced_preprocess_text
 from sklearn.datasets import fetch_20newsgroups
 
 # Update sys.path to include the target directory for imports
 script_dir = os.path.dirname(__file__)  # Gets the directory where the script is located
 parent_dir = os.path.dirname(script_dir)  # Gets the parent directory
-target_dir = os.path.join(parent_dir, "Data_preprocessing_and_analysis")  # Path to the target directory
+target_dir = os.path.join(parent_dir, "Data_Preprocessing_and_Analysis")  # Path to the target directory
 sys.path.append(target_dir)
 
 def extract_features(docs):
