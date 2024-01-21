@@ -30,8 +30,6 @@ This project demonstrates a workflow for creating, training, packaging, and serv
 ![Running the app](Images/working_HD.gif "Project working flow")
 
 
-![Running the app](Images/working_HD.gif "Project working flow")
-
 ## Team Members
 - Hogea Eduard
 - Iasmina Popovici
