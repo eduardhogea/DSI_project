@@ -39,21 +39,26 @@ Our project is organized into distinct directories, each dedicated to a specific
 
 #### 1. Data_Preprocessing_and_Analysis
 This directory contains scripts and notebooks for initial data handling, including fetching, preprocessing, and exploratory analysis.
-- `fetch_dataset.py`: Script for downloading and loading the dataset.
-- `advanced_preprocess.py`: Advanced data preprocessing functions.
-- `exploration.ipynb`: Jupyter notebook for data exploration and visualization.
+- [fetch_dataset.py](Data_Preprocessing_and_Analysis%2Ffetch_dataset.py): Script for downloading and loading the dataset.
+- [advanced_preprocess.py](Data_Preprocessing_and_Analysis%2Fadvanced_preprocess.py): Advanced data preprocessing functions.
+- [exploration.ipynb](Data_Preprocessing_and_Analysis%2Fexploration.ipynb): Jupyter notebook for data exploration and visualization.
 
 #### 2. Feature_Engineering
 Dedicated to scripts that focus on extracting and handling features from the data.
-- `feature_extraction.py`: Script for extracting and managing features for model training.
+- [feature_extraction.py](Feature_Engineering%2Ffeature_extraction.py): Script for extracting and managing features for model training.
 
 #### 3. Model_Development
 Houses scripts related to the development and testing of machine learning models.
-- `classification_model.py`: Script for building and training the classification model.
-- `zero_shot_transformer.py`: Script for implementing and experimenting with a zero-shot learning model.
-
-
-#### 4. Images
+- [classification_model.py](Model_Development%2Fclassification_model.py): Script for building and training the classification model.
+- [zero_shot_transformer.py](Model_Development%2Fzero_shot_transformer.py): Script for implementing and experimenting with a zero-shot learning model.
+- [service.py](Model_Development%2Fservice.py): Script that serves as the core component for creating and deploying a machine learning model using BentoML. It includes a `ZeroShotClassifier` class, enabling zero-shot text classification using Hugging Face's transformers, and defines an API endpoint for model inference. This API endpoint validates input data, classifies text against candidate labels, and returns classification results. By utilizing `service.py`, we provide an accessible and efficient means to serve our machine learning model, making it ready for integration into various applications.
+#### 4. Model_Testing
+- [test_advanced_preprocess.py](Model_Testing%2Ftest_advanced_preprocess.py)
+- [test_classification_model.py](Model_Testing%2Ftest_classification_model.py)
+- [test_feature_extraction.py](Model_Testing%2Ftest_feature_extraction.py)
+- [test_fetch_dataset.py](Model_Testing%2Ftest_fetch_dataset.py)
+- [test_service.py](Model_Testing%2Ftest_service.py)
+#### 5. Images
 Contains generated images, such as model outputs and visualizations.
 - Images related to model evaluation like confusion matrices are stored here for reference and documentation purposes.
 
@@ -190,7 +195,27 @@ n the service.py file, we configure our model to receive inputs in the specified
 - **Note**: Future scope for setting up a BentoML server and creating an API endpoint.
 
 ## Model Testing
-- **Note**: Future scope for developing a Python client for model testing and verification.
+#### **Overview**: 
+Unit testing is an essential practice in software development that involves testing individual components or units of code in isolation to ensure they work correctly. In our project, we have implemented unit tests to validate the functionality of various modules and scripts.
+#### **Features**:
+* **Assertions**: Assertions are essential for defining expected behavior and verifying whether the actual results match the expected results. They are the core of unit testing and help identify issues quickly.
+* **Test Case Isolation**: Ensuring that each test case runs independently is crucial. It prevents interference between tests and helps pinpoint the exact cause of failures, making debugging easier.
+* **Test Coverage Analysis**: Test coverage analysis helps track which parts of the code are exercised by the tests. It ensures that the tests adequately cover the code, increasing confidence in its correctness.
+##### 
+In our project, we have adopted a comprehensive unit testing strategy. We have created unit tests for various modules, scripts, and components, including data fetching, preprocessing, feature extraction, and model training. Each unit test is designed to validate the correctness and functionality of a specific aspect of our project. Our unit testing approach ensures the reliability and correctness of our project's various components, contributing to its overall robustness and quality.
+#### Unit Tests:
+* ***test_fetch_dataset.py***: This unit test is designed to ensure the correctness of the dataset fetching process. It verifies whether the script fetch_dataset.py is able to download and load the dataset correctly. The test fetches a small sample of the 20 Newsgroups dataset and checks if it contains the expected number of documents and labels.
+
+* ***advanced_preprocess.py***: The unit test for advanced_preprocess.py focuses on testing the advanced data preprocessing functions. These functions are crucial for text cleaning, tokenization, stop word removal, and lemmatization. The test input includes sample text data, and it verifies whether the preprocessing functions correctly clean and process the text, resulting in expected tokens.
+
+* ***feature_extraction.py***: This unit test is dedicated to feature_extraction.py, which is responsible for extracting TF-IDF features from text data. It checks if the feature extraction process produces the expected feature matrix and vectorizer based on a small sample of input documents.
+
+* ***test_classification_model.py***: This unit test is dedicated to classification_model.py, which contains scripts for building and training classification models, such as Multinomial Naive Bayes, Logistic Regression, and Linear SVM. It evaluates the performance of these models on a small subset of the 20 Newsgroups dataset and checks key metrics like precision, recall, and accuracy.
+
+* ***test_service.py***: This unit test is designed to validate the correctness and functionality of the service.py script. It defines and configures the BentoML service, ensuring efficient model serving and data serialization. Tests the service's ability to handle requests efficiently, process inputs and outputs in different formats, and ensure optimized model inference.
+
+
+#### **Note**: Python client for model testing and verification:
 
 ## Documentation and Presentation
 - **Current State**: Basic documentation provided. Comprehensive documentation and presentation are part of future work.
