@@ -435,20 +435,39 @@ It evaluates the performance of these models on a small subset of the 20 Newsgro
 * ***test_service.py***: This unit test is designed to validate the correctness and functionality of the service.py script. It defines and configures the BentoML service, ensuring efficient model serving and data serialization. 
 Tests the service's ability to handle requests efficiently, process inputs and outputs in different formats, and ensure optimized model inference.
 
+* ***test_zero_shot.py***: This unit test validates the Zero Shot Transformer Classifier's functionality. It tests the initialization, ensuring the model loads correctly, verifies the classifier's ability to accurately process text and candidate labels, and checks the model's save and load capabilities for consistency and reliability.
+
+## Test Coverage Report
+![Test Coverage Report](Images/coverage_report.jpg)
+
+Our project ensures quality and robustness through comprehensive testing. Below is the latest test coverage report, which reflects our commitment to maintaining high standards in our codebase.
+
+### Coverage Summary:
+
+- **Total Statements**: 211
+- **Total Misses**: 50
+- **Total Coverage**: 76%
+
+### Coverage Detail:
+
+- `Data_Preprocessing_and_Analysis/advanced_preprocess.py`: 85%
+- `Data_Preprocessing_and_Analysis/fetch_dataset.py`: 86%
+- `Feature_Engineering/feature_extraction.py`: 78%
+- `Model_Development/classification_model.py`: 75%
+- `Model_Development/service.py`: 83%
+- `Model_Development/zero_shot_transformer.py`: 63%
+-----------------------------------------------------
+TOTAL: 76% of our coode has Unit Test coverage
+-----------------------------------------------------
+
+It's clear that while some modules like `fetch_dataset.py` are well-tested, others like `zero_shot_transformer.py` require further attention to enhance their test coverage.
+
 
 
 
 <!-- TOC --><a name="open-issues-and-milestones"></a>
 ## Open Issues and Milestones
-- **Issue 9**: Development of a Python Client for Document Handling and API Interaction. Milestone 3 (Deadline: 09.01.2024).
-- **Issue 8**: Preparation for Upcoming Presentation on 28.11. Milestone 1 (Deadline: 28.11.2023).
-- **Issue 7**: GitHub Repository Organization and Issue Management. Milestone 1 (Deadline: 28.11.2023).
-- **Issue 6**: Update and Refine README Documentation. Milestone 1 (Deadline: 28.11.2023).
-- **Issue 5**: Using BentoML for Testing Different Linear Models. Milestone 2 (Deadline: 12.12.2023).
-- **Issue 4**: Integration of BentoML for API Endpoint for JSON Documents. Milestone 3 (Deadline: 09.01.2024).
-- **Issue 3**: Development of Comprehensive Unit Tests. Milestone 3 (Deadline: 09.01.2024).
-- **Issue 2**: Integration of BentoML for Server and Data Serialization. Milestone 2 (Deadline: 12.12.2023).
-- **Issue 1**: Integrate Zero Shot Classifier with Transformer. Milestone 2 (Deadline: 12.12.2023).
+- Mose of the issues have been solved. When one of us decides to pick up this work again, we may open new ones.
 
 <!-- TOC --><a name="presentations"></a>
 ## Presentations
