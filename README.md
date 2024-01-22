@@ -479,3 +479,14 @@ It's clear that while some modules like `fetch_dataset.py` are well-tested, othe
 <!-- TOC --><a name="future-work"></a>
 ## Future Work
 - AWS integration with BentoML
+
+
+### Extra
+
+Some nice visualizations regarding the progression of this project can be seen using the following command:
+
+```bash
+gource -1920x1080 --git-branch main --key --stop-date "2024-01-22" -c 0.5
+```
+
+Also we have posted a video on youtube that showcases that: https://www.youtube.com/watch?v=KHLrZcqM8CY
