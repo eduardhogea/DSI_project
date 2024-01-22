@@ -326,6 +326,13 @@ The Zero Shot Transformer is a cornerstone of our document classification framew
 
 This approach allows our classifier to process and categorize virtually any text, showcasing an unparalleled flexibility in handling diverse and dynamically evolving classification tasks.
 
+<!-- TOC --><a name="features"></a>
+#### Features
+- **Universal Classification**: By integrating zero-shot learning, our classifier can categorize texts into any predefined or newly introduced category, eliminating the need for category-specific training data.
+- **Model Diversity**: The inclusion of multiple transformer models (`DistilBERT`, `MobileBERT`, and `SqueezeBERT`) enhances our classifier's adaptability, allowing for optimal model selection based on specific project needs or performance criteria.
+- **User Accessibility**: Integrated into a Tkinter GUI Application, our system offers an effortless file input mechanism through drag-and-drop and browsing functionalities, making it accessible to users with varied technical expertise.
+- **Comprehensive Text Support**: Our classifier is adept at processing text from numerous file formats, including PDF, DOCX, and TXT, significantly improving workflow efficiency and user experience.
+  
 <!-- TOC --><a name="getting-started"></a>
 #### Getting Started
 To begin utilizing the Zero Shot Classifier, users are required to first clone this repository. Following the repository clone, navigate to the `Model_Development` directory and initiate the BentoML service with the command:
@@ -336,6 +343,14 @@ bentoml serve service:svc
 ```
 
 Concurrently, in a separate terminal, activate the GUI application:
+
+```
+python gui.py
+```
+
+
+
+
 These steps will launch the classification service and the graphical user interface, enabling users to easily classify documents with the Zero Shot Transformer.
 
 <!-- TOC --><a name="usage"></a>
