@@ -117,6 +117,8 @@ It leverages the 'typeform/distilbert-base-uncased-mnli' model, a distilled vers
 - **Ease of Use**:  Incorporated into a Tkinter GUI Application, it provides an intuitive drag-and-drop and browse functionality for easy file input and classification.
 - **Efficiency**: Capable of extracting and classifying text from multiple file formats (PDF, DOCX, TXT), enhancing the workflow efficiency.
 
+### Enhacements with Zero Shot Learning:
+As part of the capabilities of our Zero Shot Transformer, we've integrated Zero Shot Learning, a technique in NLP. This approach allows our model to accurately classify texts into categories it hasn't explicitly been trained on, enhancing its versatility and effectiveness in scenarios where labeled data is limited or the range of categories is broad. Utilizing the `typeform/distilbert-base-uncased-mnli` model, the transformer can dynamically adapt to new labels and text types, showcasing remarkable flexibility and efficiency in handling diverse NLP tasks.
 
 ##### Prerequisites:
 To use the Zero Shot Transformer Classifier, ensure the following prerequisites are met:
@@ -127,6 +129,20 @@ To use the Zero Shot Transformer Classifier, ensure the following prerequisites 
 #### Implementation Details
 The Zero Shot Classifier is implemented as a Python class, which handles the loading and utilization of the pre-trained DistilBERT model. 
 This design ensures a smooth and efficient user experience.
+
+### In-Depth Mechanism
+The Zero Shot Transformer Classifier operates through a series of sophisticated steps, leveraging advanced NLP techniques and transformer model architectures. Here's a detailed look at its internal mechanics:
+1. **Model Initialization and Management:** It starts by initializing the typeform/distilbert-base-uncased-mnli model, a distilled BERT model fine-tuned on MultiNLI. The script verifies the model's presence and downloads it if necessary, ensuring efficient startup.
+
+2. **Transformer Pipeline Creation:** A zero-shot classification pipeline is constructed using Hugging Face's library, managing text input and model inference. This involves processing steps like tokenization and sequence classification.
+
+3. **Dynamic Label Processing:** Uniquely, the classifier handles user-defined labels on-the-fly, enhancing its adaptability across different text types and domains.
+
+4. **Inference and Probability Estimation:** The classifier performs inference to determine label probabilities, relying on the model's ability to interpret natural language context and nuances.
+
+5. **Result Compilation and Output:** Finally, it provides probability scores for each label, giving a detailed perspective on the text's relevance to various categories.
+
+By integrating these advanced methodologies, the Zero Shot Transformer Classifier exemplifies state-of-the-art NLP applications, providing high accuracy and flexibility in text classification tasks without the need for extensive labeled training datasets.
 
 #### Usage
 Utilizing the Zero Shot Classifier involves providing the text and a selection of candidate labels. The classifier then evaluates and predicts the relevance of each label to the text, 
@@ -231,6 +247,31 @@ It evaluates the performance of these models on a small subset of the 20 Newsgro
 
 * ***test_service.py***: This unit test is designed to validate the correctness and functionality of the service.py script. It defines and configures the BentoML service, ensuring efficient model serving and data serialization. 
 Tests the service's ability to handle requests efficiently, process inputs and outputs in different formats, and ensure optimized model inference.
+
+* ***test_zero_shot.py***: This unit test validates the Zero Shot Transformer Classifier's functionality. It tests the initialization, ensuring the model loads correctly, verifies the classifier's ability to accurately process text and candidate labels, and checks the model's save and load capabilities for consistency and reliability.
+
+## Test Coverage Report
+![Test Coverage Report](Images/coverage_report.jpg)
+
+Our project ensures quality and robustness through comprehensive testing. Below is the latest test coverage report, which reflects our commitment to maintaining high standards in our codebase.
+
+### Coverage Summary:
+
+- **Total Statements**: 211
+- **Total Misses**: 50
+- **Total Coverage**: 76%
+
+### Coverage Detail:
+
+- `Data_Preprocessing_and_Analysis/advanced_preprocess.py`: 85%
+- `Data_Preprocessing_and_Analysis/fetch_dataset.py`: 86%
+- `Feature_Engineering/feature_extraction.py`: 78%
+- `Model_Development/classification_model.py`: 75%
+- `Model_Development/service.py`: 83%
+- `Model_Development/zero_shot_transformer.py`: 63%
+
+This table indicates the coverage percentage of each module in our project. It's clear that while some modules like `fetch_dataset.py` are well-tested, others like `zero_shot_transformer.py` require further attention to enhance their test coverage.
+
 
 
 #### **Note**: Python client for model testing and verification:
