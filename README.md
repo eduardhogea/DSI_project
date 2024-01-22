@@ -25,7 +25,10 @@
 This project demonstrates a workflow for creating, training, packaging, and serving a document classification model, focusing on the 20 Newsgroups dataset. It incorporates machine learning and natural language processing techniques.
 
 ## UML Diagram
-![UML Diagram](Images/MLOps_new.svg "Project UML Diagram")
+![UML Diagram](Images/MLOps_proper_UML.svg "Project UML Diagram")
+
+![Running the app](Images/working_HD.gif "Project working flow")
+
 
 ## Team Members
 - Hogea Eduard
@@ -242,7 +245,7 @@ In our project, we have adopted a comprehensive unit testing strategy. We have c
 ## Presentations
 - **Milestone 1 Presentation** (Deadline: 28.11.2023): [View Presentation](https://docs.google.com/presentation/d/1ViKHCMRyTVjxCQlsLhDuiJC7XtjG7_u1FhZ6M06_4JU/edit?usp=sharing)
 - **Milestone 2 Presentation** (Deadline: 12.12.2023): [View Presentation](https://docs.google.com/presentation/d/1xVbAxn8igkAqN0FpJJ7Ypyx6f0Dw2WGvtSc2nfSI5uE/edit#slide=id.g2a602b6ec67_0_0)
-- **Milestone 3 Presentation** (Deadline: 09.01.2024): *Link to be provided*
+- **Milestone 3 Presentation** (Deadline: 09.01.2024): [View Presentation](https://docs.google.com/presentation/d/1spmbNwVFeCxn_9IpIph1D-SG6kGZFu5ZwRyb0OMrCcc/edit#slide=id.g2a602b6ec67_0_378)
 - **Final Project Presentation**: [View Presentation](https://docs.google.com/presentation/d/1bjhL4oEfHYM9hTLNkr1Y1zyaCfyfCS1406AZPVSeg5A/edit)
 
 ## Future Work
