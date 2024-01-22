@@ -54,7 +54,10 @@ Dedicated to scripts that focus on extracting and handling features from the dat
 Houses scripts related to the development and testing of machine learning models.
 - [classification_model.py](Model_Development%2Fclassification_model.py): Script for building and training the classification model.
 - [zero_shot_transformer.py](Model_Development%2Fzero_shot_transformer.py): Script for implementing and experimenting with a zero-shot learning model.
-- [service.py](Model_Development%2Fservice.py): Script that serves as the core component for creating and deploying a machine learning model using BentoML. It includes a `ZeroShotClassifier` class, enabling zero-shot text classification using Hugging Face's transformers, and defines an API endpoint for model inference. This API endpoint validates input data, classifies text against candidate labels, and returns classification results. By utilizing `service.py`, we provide an accessible and efficient means to serve our machine learning model, making it ready for integration into various applications.
+- [service.py](Model_Development%2Fservice.py): Script that serves as the core component for creating and deploying a machine learning model using BentoML. 
+It includes a `ZeroShotClassifier` class, enabling zero-shot text classification using Hugging Face's transformers, and defines an API endpoint for model inference. 
+This API endpoint validates input data, classifies text against candidate labels, and returns classification results. By utilizing `service.py`, we provide an accessible 
+and efficient means to serve our machine learning model, making it ready for integration into various applications.
 #### 4. Model_Testing
 - [test_advanced_preprocess.py](Model_Testing%2Ftest_advanced_preprocess.py)
 - [test_classification_model.py](Model_Testing%2Ftest_classification_model.py)
@@ -91,7 +94,8 @@ Contains generated images, such as model outputs and visualizations.
 **Implementation**: The performance of each model is evaluated using two key methods.
 The evaluation metrics are implemented and displayed in the classification_model.py script, with results printed to the console and confusion matrices saved as PNG files.
 
-1. **Confusion Matrix**: Visual representation of the performance of each classifier. Separate confusion matrices are generated and saved for each model, providing insights into the true positives, false positives, false negatives, and true negatives for each class.
+1. **Confusion Matrix**: Visual representation of the performance of each classifier. Separate confusion matrices are generated and saved for each model, providing insights into the true positives, 
+false positives, false negatives, and true negatives for each class.
 
 2. **Classification Report**: Includes precision, recall, f1-score, and support for each class. This report is generated for each classifier, providing a detailed view of their performance across different categories.
 
@@ -104,7 +108,8 @@ The evaluation metrics are implemented and displayed in the classification_model
 ### Zero Shot Transformer
 
 #### Overview:
-The Zero Shot Transformer is an integral part of our document classification project. It utilizes the Hugging Face Transformers library to perform classification tasks without labeled training data. It leverages the 'typeform/distilbert-base-uncased-mnli' model, a distilled version of BERT fine-tuned on the MultiNLI dataset, to infer the probabilities of different categories or labels for a given text. 
+The Zero Shot Transformer is an integral part of our document classification project. It utilizes the Hugging Face Transformers library to perform classification tasks without labeled training data. 
+It leverages the 'typeform/distilbert-base-uncased-mnli' model, a distilled version of BERT fine-tuned on the MultiNLI dataset, to infer the probabilities of different categories or labels for a given text. 
 
 #### Features:
 - **Zero-Shot Learning**: Employs a state-of-the-art approach to classify texts into predefined or dynamic categories without needing training data for each category.
@@ -124,8 +129,10 @@ The Zero Shot Classifier is implemented as a Python class, which handles the loa
 This design ensures a smooth and efficient user experience.
 
 #### Usage
-Utilizing the Zero Shot Classifier involves providing the text and a selection of candidate labels. The classifier then evaluates and predicts the relevance of each label to the text, offering clear insights into the most fitting categories.
-In our project, text extracted from various file formats (PDF, DOCX, TXT) is classified using the Zero Shot Classifier in a Tkinter GUI Application that provides an intuitive interface for the classifying task. Here is how to use it:
+Utilizing the Zero Shot Classifier involves providing the text and a selection of candidate labels. The classifier then evaluates and predicts the relevance of each label to the text, 
+offering clear insights into the most fitting categories.
+In our project, text extracted from various file formats (PDF, DOCX, TXT) is classified using the Zero Shot Classifier in a Tkinter GUI Application that provides an intuitive interface for the classifying task. 
+Here is how to use it:
 1. **Start the Application:**
 - Run the script to open the Tkinter GUI window.
 - The title of the window is 'Drag and Drop File Converter'. 
@@ -173,7 +180,8 @@ In our implementation, we use the service.py script, which plays a critical role
 
 
 ## Configuring BentoML for Data Serialization
-Data serialization is a critical component in machine learning services, determining how data is converted into a format suitable for transmission over a network and then deserialized back into a usable format. In our project, we have configured BentoML to handle this process efficiently, ensuring that our model can interpret the incoming data correctly and that the outputs are in a user-friendly format.
+Data serialization is a critical component in machine learning services, determining how data is converted into a format suitable for transmission over a network and then deserialized back into a usable format. 
+In our project, we have configured BentoML to handle this process efficiently, ensuring that our model can interpret the incoming data correctly and that the outputs are in a user-friendly format.
 
 ### Key Components in Data Serialization Configuration:
 - **Data Format Selection**
@@ -181,7 +189,8 @@ We have configured our BentoML service to accept inputs in JSON and Numpy array 
 - **Utilizing BentoML's Serialization Tools**
 BentoML offers a variety of serialization tools such as bentoml.io.JSON and bentoml.io.NumpyNdarray. These tools make it easy to define the expected input and output formats for the model.
 - **Input and Output Configuration**
-n the service.py file, we configure our model to receive inputs in the specified formats. For instance, a client can send a JSON object, which BentoML will deserialize into a Python object for the model to process. Similarly, the model's output is serialized back into the chosen format (JSON or Numpy array) before being sent back to the client.
+In the service.py file, we configure our model to receive inputs in the specified formats. For instance, a client can send a JSON object, which BentoML will deserialize into a Python object for the model to process. 
+Similarly, the model's output is serialized back into the chosen format (JSON or Numpy array) before being sent back to the client.
 
 ### Benefits of our approach 
 - **Flexibility and Compatibility**:  By supporting multiple data formats, our service can easily integrate with various client applications, making it more versatile.
@@ -199,23 +208,29 @@ n the service.py file, we configure our model to receive inputs in the specified
 
 ## Model Testing
 #### **Overview**: 
-Unit testing is an essential practice in software development that involves testing individual components or units of code in isolation to ensure they work correctly. In our project, we have implemented unit tests to validate the functionality of various modules and scripts.
+Unit testing is an essential practice in software development that involves testing individual components or units of code in isolation to ensure they work correctly. 
+In our project, we have implemented unit tests to validate the functionality of various modules and scripts.
 #### **Features**:
 * **Assertions**: Assertions are essential for defining expected behavior and verifying whether the actual results match the expected results. They are the core of unit testing and help identify issues quickly.
 * **Test Case Isolation**: Ensuring that each test case runs independently is crucial. It prevents interference between tests and helps pinpoint the exact cause of failures, making debugging easier.
 * **Test Coverage Analysis**: Test coverage analysis helps track which parts of the code are exercised by the tests. It ensures that the tests adequately cover the code, increasing confidence in its correctness.
 ##### 
-In our project, we have adopted a comprehensive unit testing strategy. We have created unit tests for various modules, scripts, and components, including data fetching, preprocessing, feature extraction, and model training. Each unit test is designed to validate the correctness and functionality of a specific aspect of our project. Our unit testing approach ensures the reliability and correctness of our project's various components, contributing to its overall robustness and quality.
+In our project, we have adopted a comprehensive unit testing strategy. We have created unit tests for various modules, scripts, and components, including data fetching, preprocessing, feature extraction, and model training. 
+Each unit test is designed to validate the correctness and functionality of a specific aspect of our project. Our unit testing approach ensures the reliability and correctness of our project's various components, contributing to its overall robustness and quality.
 #### Unit Tests:
-* ***test_fetch_dataset.py***: This unit test is designed to ensure the correctness of the dataset fetching process. It verifies whether the script fetch_dataset.py is able to download and load the dataset correctly. The test fetches a small sample of the 20 Newsgroups dataset and checks if it contains the expected number of documents and labels.
+* ***test_fetch_dataset.py***: This unit test is designed to ensure the correctness of the dataset fetching process. It verifies whether the script fetch_dataset.py is able to download and load the dataset correctly. 
+The test fetches a small sample of the 20 Newsgroups dataset and checks if it contains the expected number of documents and labels.
 
-* ***advanced_preprocess.py***: The unit test for advanced_preprocess.py focuses on testing the advanced data preprocessing functions. These functions are crucial for text cleaning, tokenization, stop word removal, and lemmatization. The test input includes sample text data, and it verifies whether the preprocessing functions correctly clean and process the text, resulting in expected tokens.
+* ***advanced_preprocess.py***: The unit test for advanced_preprocess.py focuses on testing the advanced data preprocessing functions. These functions are crucial for text cleaning, tokenization, stop word removal, and lemmatization. 
+The test input includes sample text data, and it verifies whether the preprocessing functions correctly clean and process the text, resulting in expected tokens.
 
 * ***feature_extraction.py***: This unit test is dedicated to feature_extraction.py, which is responsible for extracting TF-IDF features from text data. It checks if the feature extraction process produces the expected feature matrix and vectorizer based on a small sample of input documents.
 
-* ***test_classification_model.py***: This unit test is dedicated to classification_model.py, which contains scripts for building and training classification models, such as Multinomial Naive Bayes, Logistic Regression, and Linear SVM. It evaluates the performance of these models on a small subset of the 20 Newsgroups dataset and checks key metrics like precision, recall, and accuracy.
+* ***test_classification_model.py***: This unit test is dedicated to classification_model.py, which contains scripts for building and training classification models, such as Multinomial Naive Bayes, Logistic Regression, and Linear SVM. 
+It evaluates the performance of these models on a small subset of the 20 Newsgroups dataset and checks key metrics like precision, recall, and accuracy.
 
-* ***test_service.py***: This unit test is designed to validate the correctness and functionality of the service.py script. It defines and configures the BentoML service, ensuring efficient model serving and data serialization. Tests the service's ability to handle requests efficiently, process inputs and outputs in different formats, and ensure optimized model inference.
+* ***test_service.py***: This unit test is designed to validate the correctness and functionality of the service.py script. It defines and configures the BentoML service, ensuring efficient model serving and data serialization. 
+Tests the service's ability to handle requests efficiently, process inputs and outputs in different formats, and ensure optimized model inference.
 
 
 #### **Note**: Python client for model testing and verification:
